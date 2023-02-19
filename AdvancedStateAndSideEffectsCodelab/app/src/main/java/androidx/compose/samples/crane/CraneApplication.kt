@@ -17,12 +17,11 @@
 package androidx.compose.samples.crane
 
 import android.app.Application
+import androidx.compose.samples.crane.data.DestinationsRepository
 import androidx.compose.samples.crane.util.UnsplashSizingInterceptor
 import coil.ImageLoader
 import coil.ImageLoaderFactory
-import dagger.hilt.android.HiltAndroidApp
 
-@HiltAndroidApp
 class CraneApplication : Application(), ImageLoaderFactory {
 
     /**
@@ -36,4 +35,7 @@ class CraneApplication : Application(), ImageLoaderFactory {
             }
             .build()
     }
+
+    val destinationRepository: DestinationsRepository
+        get() = ServiceLocator.provideDestinationRepository(this)
 }

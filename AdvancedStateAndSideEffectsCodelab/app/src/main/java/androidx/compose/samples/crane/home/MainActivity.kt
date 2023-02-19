@@ -26,9 +26,7 @@ import androidx.compose.samples.crane.details.launchDetailsActivity
 import androidx.compose.samples.crane.ui.CraneTheme
 import androidx.core.view.WindowCompat
 import com.google.accompanist.insets.ProvideWindowInsets
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

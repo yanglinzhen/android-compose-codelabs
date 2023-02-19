@@ -22,33 +22,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.VisibleForTesting
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.produceState
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.samples.crane.base.Result
 import androidx.compose.samples.crane.data.ExploreModel
 import androidx.compose.samples.crane.ui.CraneTheme
+import androidx.compose.samples.crane.util.getViewModelFactory
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -64,7 +45,6 @@ import com.google.android.libraries.maps.MapView
 import com.google.android.libraries.maps.model.LatLng
 import com.google.maps.android.ktx.addMarker
 import com.google.maps.android.ktx.awaitMap
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 internal const val KEY_ARG_DETAILS_CITY_NAME = "KEY_ARG_DETAILS_CITY_NAME"
@@ -80,7 +60,6 @@ fun createDetailsActivityIntent(context: Context, item: ExploreModel): Intent {
     return intent
 }
 
-@AndroidEntryPoint
 class DetailsActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -115,7 +94,7 @@ data class DetailsUiState(
 fun DetailsScreen(
     onErrorLoading: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: DetailsViewModel = viewModel()
+    viewModel: DetailsViewModel = viewModel(factory = getViewModelFactory())
 ) {
     val uiState by produceState(initialValue = DetailsUiState(isLoading = true)) {
         val cityDetailsResult = viewModel.cityDetails
