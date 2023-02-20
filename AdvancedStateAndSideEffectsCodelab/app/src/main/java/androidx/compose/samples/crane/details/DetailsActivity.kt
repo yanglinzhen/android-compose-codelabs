@@ -75,7 +75,8 @@ class DetailsActivity : ComponentActivity() {
                             onErrorLoading = { finish() },
                             modifier = Modifier
                                 .statusBarsPadding()
-                                .navigationBarsPadding()
+                                .navigationBarsPadding(),
+                            viewModel = viewModel(factory = getViewModelFactory(intent?.extras))
                         )
                     }
                 }
